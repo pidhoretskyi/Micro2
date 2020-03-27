@@ -51,12 +51,12 @@ void LCD_Pulse(){
 }
 
 void WriteByte(uint8_t data){
-	HAL_GPIO_WritePin(LCD_PORT, ((data & 0x0F)) << LCD_PIN_OFFSET, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LCD_PORT, (((data<<4) & 0x0F)) << LCD_PIN_OFFSET, GPIO_PIN_SET);
 	LCD_Pulse();
 	HAL_GPIO_WritePin(LCD_PORT, (0x0F) << LCD_PIN_OFFSET, GPIO_PIN_SET);
 	DelayMs(100);
 	
-	HAL_GPIO_WritePin(LCD_PORT, (((data<<4) & 0x0F)) << LCD_PIN_OFFSET, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LCD_PORT, ((data & 0x0F)) << LCD_PIN_OFFSET, GPIO_PIN_SET);
 	LCD_Pulse();
 	HAL_GPIO_WritePin(LCD_PORT, (0x0F) << LCD_PIN_OFFSET, GPIO_PIN_SET);
 	DelayMs(100);
